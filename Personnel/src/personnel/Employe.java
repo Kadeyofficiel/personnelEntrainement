@@ -4,7 +4,6 @@ package personnel;
 // Importation du Package LocalDate
 import java.time.LocalDate;
 import java.io.Serializable;
-import java.util.TreeSet;
 
 /**
  * Employé d'une ligue hébergée par la M2L. Certains peuvent 
@@ -181,8 +180,6 @@ public class Employe implements Serializable, Comparable<Employe>
 	    this.dateDepart = dateDepart; // Met à jour dateDépart
 	}
 
-	
-	// Exceptions
 
 	/**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
