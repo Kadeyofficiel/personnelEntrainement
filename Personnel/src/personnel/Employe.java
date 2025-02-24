@@ -1,6 +1,10 @@
 package personnel;
 
+
+// Importation du Package LocalDate
+import java.time.LocalDate;
 import java.io.Serializable;
+import java.util.TreeSet;
 
 /**
  * Employé d'une ligue hébergée par la M2L. Certains peuvent 
@@ -17,7 +21,12 @@ public class Employe implements Serializable, Comparable<Employe>
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
 	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password)
+	// Ajout des variables d'instance private de dateArrive et dateDepart
+	private LocalDate dateArrive;
+	private LocalDate dateDepart;
+	
+	// Ajout des variables d'instance de type LocalDate
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrive, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
@@ -25,6 +34,10 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.password = password;
 		this.mail = mail;
 		this.ligue = ligue;
+		
+		// Initialisation des variables d'instances
+		this.dateArrive = dateArrive;
+		this.dateDepart = dateDepart;
 	}
 	
 	/**
@@ -144,6 +157,28 @@ public class Employe implements Serializable, Comparable<Employe>
 		return ligue;
 	}
 
+	// Getters de dateArrive
+	public LocalDate getDateArrive()
+	{
+		return dateArrive;
+	}
+	// Getters de dateDepart
+	public LocalDate getDateDepart()
+	{
+		return dateDepart;
+	}
+	
+	// Setters de dateArrive
+	public void setDateArrive(LocalDate dateArrive)
+	{
+		this.dateArrive = dateArrive;
+	}
+	
+	// Setters de dateDepart
+	public void setDateDepart (LocalDate dateDepart)
+	{
+		this.dateDepart = dateDepart;
+	}
 	/**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
 	 * récupère les droits d'administration sur sa ligue.
