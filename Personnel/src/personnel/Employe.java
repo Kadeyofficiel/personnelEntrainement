@@ -20,7 +20,6 @@ public class Employe implements Serializable, Comparable<Employe>
 	private String nom, prenom, password, mail;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
-	
 	// Ajout des variables d'instance private de dateArrive et dateDepart
 	private LocalDate dateArrive;
 	private LocalDate dateDepart;
@@ -34,7 +33,6 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.password = password;
 		this.mail = mail;
 		this.ligue = ligue;
-		
 		// Initialisation des variables d'instances
 		this.dateArrive = dateArrive;
 		this.dateDepart = dateDepart;
@@ -174,11 +172,18 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.dateArrive = dateArrive;
 	}
 	
-	// Setters de dateDepart
-	public void setDateDepart (LocalDate dateDepart)
-	{
-		this.dateDepart = dateDepart;
+	// Setters de dateDepart + Exception
+	public void setDateDepart(LocalDate dateDepart) {
+		// Vérifie que DateDépart est non null + avant date arrivé et provoque l'exception
+	    if (dateDepart != null && dateDepart.isBefore(this.dateArrive)) {
+	        throw new IllegalArgumentException("La date de départ doit être avant ou égale à la date d'arrivé.");
+	    }
+	    this.dateDepart = dateDepart; // Met à jour dateDépart
 	}
+
+	
+	// Exceptions
+
 	/**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
 	 * récupère les droits d'administration sur sa ligue.
