@@ -20,7 +20,7 @@ class testGestionPersonnel
 	}
 
 	@Test
-	void addEmploye() throws SauvegardeImpossible
+	void addEmploye() throws SauvegardeImpossible, ExceptionDate
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2023, 1, 1), LocalDate.of(2023, 12, 30)); 

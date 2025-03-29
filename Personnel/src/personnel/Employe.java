@@ -173,18 +173,20 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	// Setters de dateArrive
-	public void setDateArrive(LocalDate dateArrive)
+	public void setDateArrive(LocalDate dateArrive) throws SauvegardeImpossible
 	{
 		this.dateArrive = dateArrive;
+		gestionPersonnel.update(this);
 	}
 	
 	// Setters de dateDepart + Exception
-	public void setDateDepart(LocalDate dateDepart) {
+	public void setDateDepart(LocalDate dateDepart) throws SauvegardeImpossible {
 		// Vérifie que DateDépart est non null + avant date arrivé et provoque l'exception
 	    if (dateDepart != null && dateDepart.isBefore(this.dateArrive)) {
-	        throw new IllegalArgumentException("La date de départ doit être avant ou égale à la date d'arrivé.");
+	        throw new IllegalArgumentException("La date de départ doit être après ou égale à la date d'arrivée.");
 	    }
 	    this.dateDepart = dateDepart; // Met à jour dateDépart
+	    gestionPersonnel.update(this);
 	}
 
 
@@ -193,7 +195,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * récupère les droits d'administration sur sa ligue.
 	 */
 	
-	public void remove()
+	public void remove() throws SauvegardeImpossible
 	{
 		Employe root = gestionPersonnel.getRoot();
 		if (this != root)
