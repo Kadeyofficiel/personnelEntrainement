@@ -1,16 +1,16 @@
 package personnel;
 
-public class ExceptionDate extends Exception
+public class Erreurdate extends ExceptionDate
 {
 	private static final long serialVersionUID = 1L;
 
-	public ExceptionDate()
+	public Erreurdate()
 	{
 		super("Erreur dans les dates");
 	}
 	
-	public ExceptionDate(String message)
+	public Erreurdate(String message)
 	{
 		super(message);
 	}
-}
+} 

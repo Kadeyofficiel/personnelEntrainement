@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import personnel.GestionPersonnel;
 import personnel.Ligue;
 import personnel.SauvegardeImpossible;
+import personnel.Employe;
 
 public class Serialization implements personnel.Passerelle
 {
@@ -23,7 +24,15 @@ public class Serialization implements personnel.Passerelle
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
-			return null;
+			// Si le fichier n'existe pas ou ne peut pas être lu, on crée un GestionPersonnel avec un root par défaut
+			GestionPersonnel gestionPersonnel = new GestionPersonnel();
+			try {
+				// Créer un root avec l'ID -1 (valeur temporaire)
+				gestionPersonnel.addRoot(-1, "root", "", "", "toor", null, null);
+			} catch (SauvegardeImpossible ex) {
+				System.err.println(ex.getMessage());
+			}
+			return gestionPersonnel;
 		}
 	}
 	
@@ -50,4 +59,35 @@ public class Serialization implements personnel.Passerelle
 	{
 		return -1;
 	}
+	
+	@Override
+	public int insert(Employe employe) throws SauvegardeImpossible
+	{
+		return -1;
+	}
+	
+	@Override
+	public void update(Employe employe) throws SauvegardeImpossible
+	{
+		
+	}
+	
+	@Override
+	public void delete(Employe employe) throws SauvegardeImpossible
+	{
+		
+	}
+	
+	@Override
+	public void delete(Ligue ligue) throws SauvegardeImpossible
+	{
+		
+	}
+	
+	@Override
+	public void update(Ligue ligue) throws SauvegardeImpossible
+	{
+		
+	}
 }
+																													
