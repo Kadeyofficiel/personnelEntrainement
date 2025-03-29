@@ -113,4 +113,16 @@ public class GestionPersonnel implements Serializable
 	{
 		return root;
 	}
+	
+	public void update(Ligue ligue) throws SauvegardeImpossible
+	{
+		if (passerelle != null)
+			passerelle.update(ligue);
+	}
+	public void update(Employe employe) throws SauvegardeImpossible
+	{
+		if (passerelle != null)
+			passerelle.update(employe);
+	}
+
 }
