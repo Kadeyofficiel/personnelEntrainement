@@ -90,6 +90,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		return prenom;
 	}
+	public String getPassword()
+	{
+		return password;
+	}
 	
 	/**
 	 * Change le prénom de l'employé.

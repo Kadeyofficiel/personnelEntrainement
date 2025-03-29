@@ -10,7 +10,11 @@ import personnel.*;
 
 class testLigue 
 {
-	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
+	GestionPersonnel gestionPersonnel;
+	
+	public testLigue() throws SauvegardeImpossible, ExceptionDate {
+		gestionPersonnel = GestionPersonnel.getGestionPersonnel();
+	}
 	
 	@Test
 	void createLigue() throws SauvegardeImpossible
@@ -20,32 +24,61 @@ class testLigue
 	}
 
 	@Test
-	void addEmploye() throws SauvegardeImpossible
+	void addEmploye() throws SauvegardeImpossible, ExceptionDate
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2023, 1, 1), LocalDate.of(2023, 12, 30)); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
-	void getNom() throws SauvegardeImpossible
-	{
+	@Test
+	void setEmploye() throws SauvegardeImpossible, ExceptionDate {
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2023, 1, 1), LocalDate.of(2023, 12, 30)); 
+		employe.setNom("test");
+		assertEquals("test" , employe.getNom());
+	}
+	
+	@Test
+	void getNom() throws SauvegardeImpossible {
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		assertEquals("Fléchettes", ligue.getNom());
 	}
 	
-	void setNom() throws SauvegardeImpossible
-	{
+	@Test
+	void setNom() throws SauvegardeImpossible {
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		ligue.setNom("Billard");
-		assertEquals("Billard", ligue.getNom());
+		ligue.setNom("Bowling");
+		assertEquals("Bowling", ligue.getNom());
 	}
 	
-	void getAdministrateur() throws SauvegardeImpossible
-	{
+	
+	@Test
+	void getAdministrator() throws SauvegardeImpossible, ExceptionDate {
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gerard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2023, 1, 1), LocalDate.of(2023, 12, 30)); 
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2023, 1, 1), LocalDate.of(2023, 12, 30)); 
 		ligue.setAdministrateur(employe);
-		assertEquals("root", employe.getNom());
+		assertEquals(employe, ligue.getAdministrateur());
 	}
+	@Test
+	void deleteAndChangeAdmin() throws SauvegardeImpossible, ExceptionDate{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2023, 1, 1), LocalDate.of(2023, 12, 30));
+		ligue.setAdministrateur(employe);
+		assertEquals(employe, ligue.getAdministrateur());
+		employe.remove();
+		assertFalse(ligue.getEmployes().contains(employe));
+		assertFalse(ligue.getEmployes().contains(employe));
+		assertEquals(gestionPersonnel.getRoot(), ligue.getAdministrateur());
+	}
+	
+	@Test
+	void deleteLigue() throws SauvegardeImpossible {
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		ligue.remove();
+		assertFalse(gestionPersonnel.getLigues().contains(ligue));
+	}
+	
+	
 	
 }
