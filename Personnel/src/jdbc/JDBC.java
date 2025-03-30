@@ -136,7 +136,8 @@ public class JDBC implements Passerelle
 	@Override
 	public void sauvegarderGestionPersonnel(GestionPersonnel gestionPersonnel) throws SauvegardeImpossible 
 	{
-		close();
+		// La sauvegarde est déjà gérée par les méthodes insert, update et delete
+		// Pas besoin de fermer la connexion ici car elle est réutilisée
 	}
 	
 	public void close() throws SauvegardeImpossible

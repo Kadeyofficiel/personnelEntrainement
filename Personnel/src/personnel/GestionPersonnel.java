@@ -17,7 +17,7 @@ public class GestionPersonnel implements Serializable
 	private Employe root;
 	
 	public final static int SERIALIZATION = 1, JDBC = 2, 
-			TYPE_PASSERELLE = SERIALIZATION;  
+			TYPE_PASSERELLE = JDBC;  
 	
 	private static Passerelle passerelle = TYPE_PASSERELLE == JDBC ? new jdbc.JDBC() : new serialisation.Serialization();	
 	
