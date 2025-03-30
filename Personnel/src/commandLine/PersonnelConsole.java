@@ -31,34 +31,11 @@ public class PersonnelConsole
 		Menu menu = new Menu("Gestion du personnel des ligues");
 		menu.add(employeConsole.editerEmploye(gestionPersonnel.getRoot()));
 		menu.add(ligueConsole.menuLigues());
-		menu.add(raccourciAjouterEmploye());
 		menu.add(menuQuitter());
 		return menu;
 	}
+	
 
-	private Menu raccourciAjouterEmploye()
-	{
-		Menu menu = new Menu("Raccourci: Ajouter un employé", "a");
-		menu.add(selectionnerLiguePourAjout());
-		menu.addBack("q");
-		return menu;
-	}
-	
-	private List<Ligue> selectionnerLiguePourAjout()
-	{
-		return new List<Ligue>("Sélectionner une ligue pour ajouter un employé", "l", 
-				() -> new ArrayList<>(gestionPersonnel.getLigues()),
-				(ligue) -> ajouterEmployeMenu(ligue)
-				);
-	}
-	
-	private Menu ajouterEmployeMenu(Ligue ligue)
-	{
-		Menu menu = new Menu("Ajouter un employé à " + ligue.getNom());
-		menu.add(ajouterEmploye(ligue));
-		menu.addBack("q");
-		return menu;
-	}
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{
